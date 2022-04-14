@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/main.c
+stdlib.h
+-
+string.h
+-
+assert.h
+-
+
