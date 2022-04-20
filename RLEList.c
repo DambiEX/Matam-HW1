@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #define NULL_POINTER_ERROR -1
 #define EMPTY '\0'
+#define CANT_GET 0
 
 typedef struct node{
     char symbol;
@@ -29,7 +30,7 @@ Node NodeCreate(char input){
 RLEList RLEListCreate(){
     RLEList list = malloc(sizeof(*list));
     if (!list)
-        return NULL;
+        return NULL; //requested error value is NULL
     list->first_node = NodeCreate(EMPTY);
     if (!list->first_node)
         return NULL;
@@ -47,6 +48,7 @@ void RLEListDestroy(RLEList list){
         free(head);
         head = temp;
     }
+    free(head);
     free(list);
 }
 
@@ -59,15 +61,14 @@ RLEListResult RLEListAppend(RLEList list, char input){
         last_node = last_node->next;
     }
 
-    if (input == last_node->symbol){
+    if (input == last_node->symbol)
         last_node->repetitions++;
-    }
-
-    else{
-    Node new_node = NodeCreate(input);
-    if (!new_node)
-        return RLE_LIST_OUT_OF_MEMORY;
-    last_node->next = new_node;
+    else
+    {
+        Node new_node = NodeCreate(input);
+        if (!new_node)
+            return RLE_LIST_OUT_OF_MEMORY;
+        last_node->next = new_node;
     }
 
     list->size++;
@@ -88,12 +89,13 @@ void NodeCutOff(Node node){
     if (node->next->next) //if C exists
         node->next = node->next->next; //A->B --> A->C
     else
-        node->next = NULL;
+        node->next = NULL; // A->NULL
     free(node->next); // B --> NULL
 }
 
 Node FindNode(RLEList list, int index){
     /*
+     * receives a list and an ---appropriate--- index shorter than list size.
      * returns the node that holds the character with the index.
      * example: given: (list = [A10,B10,C10], index = 15), returns B. if index>=20 returns C.
      * is used in: RLEListRemove, RLEListGet.
@@ -123,7 +125,7 @@ RLEListResult RLEListRemove(RLEList list, int index){
         return check;
 
     Node node = FindNode(list, index);
-    if (node->next->repetitions < 2)
+    if (node->next->repetitions <= 1)
         NodeCutOff(node);
     else
         node->next->repetitions--;
@@ -138,7 +140,7 @@ char RLEListGet(RLEList list, int index, RLEListResult *result){
         *result = check;
     if (check != RLE_LIST_SUCCESS)
     {
-        return 0;
+        return CANT_GET;
     }
 
     Node node = FindNode(list, index);
