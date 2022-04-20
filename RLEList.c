@@ -3,25 +3,26 @@
 #include "RLEList.h"
 #include <stdlib.h>
 #define NULL_POINTER_ERROR -1
+#define EMPTY '\0'
 
 typedef struct node{
-    char data;
-    int repeats;
+    char symbol;
+    int repetitions;
     struct node* next;
 } *Node;
 
-struct RLEList_t{
+struct RLEList_t{ // holds the first node of a chain
     Node first_node;
     int size;
 };
 
-Node NodeCreate(char value){
+Node NodeCreate(char input){
     Node node = malloc(sizeof(*node));
     if (!node)
         return NULL;
     node->next = NULL;
-    node->data = value;
-    node->repeats = 1;
+    node->symbol = input;
+    node->repetitions = 1;
     return node;
 }
 
@@ -29,29 +30,28 @@ RLEList RLEListCreate(){
     RLEList list = malloc(sizeof(*list));
     if (!list)
         return NULL;
-    list->first_node = NodeCreate('\0');
+    list->first_node = NodeCreate(EMPTY);
     if (!list->first_node)
         return NULL;
     list->size = 0;
     return list;
 }
 
-void NodesRecursiveDestroy(Node node){
-    if (node->next)
-        NodesRecursiveDestroy(node->next);
-    free(node);
-}
-
 void RLEListDestroy(RLEList list){
     if (!list)
         return;
-    if (list->first_node)
-        NodesRecursiveDestroy(list->first_node);
+    Node head = list->first_node;
+    Node temp;
+    while (head->next){
+        temp = head->next;
+        free(head);
+        head = temp;
+    }
     free(list);
 }
 
-RLEListResult RLEListAppend(RLEList list, char value){
-    if (!list || !value)
+RLEListResult RLEListAppend(RLEList list, char input){
+    if (!list || !input)
         return RLE_LIST_NULL_ARGUMENT;
 
     Node last_node = list->first_node;
@@ -59,12 +59,12 @@ RLEListResult RLEListAppend(RLEList list, char value){
         last_node = last_node->next;
     }
 
-    if (value == last_node->data){
-        last_node->repeats++;
+    if (input == last_node->symbol){
+        last_node->repetitions++;
     }
 
     else{
-    Node new_node = NodeCreate(value);
+    Node new_node = NodeCreate(input);
     if (!new_node)
         return RLE_LIST_OUT_OF_MEMORY;
     last_node->next = new_node;
@@ -80,14 +80,15 @@ int RLEListSize(RLEList list){
     return list->size;
 }
 
-void NodeSever(Node node){
+void NodeCutOff(Node node){
     /*
-     * "Sever" means "Cut"
      * disconnects the node AFTER the given argument.
      * given the list is nodes ABC and A is an argument: A->B->C --> A->C
      */
     if (node->next->next) //if C exists
         node->next = node->next->next; //A->B --> A->C
+    else
+        node->next = NULL;
     free(node->next); // B --> NULL
 }
 
@@ -99,9 +100,9 @@ Node FindNode(RLEList list, int index){
      */
     Node node = list->first_node;
     int depth = 0;
-    while (node->next->repeats + depth < index){ // while (sum this far) < index
-        // for example: index=0, repeats=1, depth=0: stops looping
-        depth += node->next->repeats;
+    while (node->next->repetitions + depth < index){ // while (sum this far) < index
+        // for example: index=0, repetitions=1, depth=0: stops looping
+        depth += node->next->repetitions;
         node = node->next;
     }
     return node;
@@ -122,10 +123,10 @@ RLEListResult RLEListRemove(RLEList list, int index){
         return check;
 
     Node node = FindNode(list, index);
-    if (node->next->repeats < 2)
-        NodeSever(node);
+    if (node->next->repetitions < 2)
+        NodeCutOff(node);
     else
-        node->next->repeats--;
+        node->next->repetitions--;
 
     list->size--;
     return RLE_LIST_SUCCESS;
@@ -141,5 +142,5 @@ char RLEListGet(RLEList list, int index, RLEListResult *result){
     }
 
     Node node = FindNode(list, index);
-    return node->data;
+    return node->symbol;
 }
