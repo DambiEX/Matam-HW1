@@ -128,6 +128,30 @@ Matam_HW1/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/build
 .PHONY : Matam_HW1/fast
 
+RLEList.obj: RLEList.c.obj
+.PHONY : RLEList.obj
+
+# target to build an object file
+RLEList.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/RLEList.c.obj
+.PHONY : RLEList.c.obj
+
+RLEList.i: RLEList.c.i
+.PHONY : RLEList.i
+
+# target to preprocess a source file
+RLEList.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/RLEList.c.i
+.PHONY : RLEList.c.i
+
+RLEList.s: RLEList.c.s
+.PHONY : RLEList.s
+
+# target to generate assembly for a file
+RLEList.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/RLEList.c.s
+.PHONY : RLEList.c.s
+
 main.obj: main.c.obj
 .PHONY : main.obj
 
@@ -161,6 +185,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Matam_HW1
+	@echo ... RLEList.obj
+	@echo ... RLEList.i
+	@echo ... RLEList.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
