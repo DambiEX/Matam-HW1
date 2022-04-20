@@ -83,6 +83,7 @@ int RLEListSize(RLEList list){
 
 void NodeCutOff(Node node){
     /*
+     * receives a node with AT LEAST 1 following node.
      * disconnects the node AFTER the given argument.
      * given the list is nodes ABC and A is an argument: A->B->C --> A->C
      */
@@ -124,11 +125,18 @@ RLEListResult RLEListRemove(RLEList list, int index){
     if (check != RLE_LIST_SUCCESS)
         return check;
 
-    Node node = FindNode(list, index);
-    if (node->next->repetitions <= 1)
-        NodeCutOff(node);
+    Node node;
+    if (index == 0)
+        node = list->first_node;
     else
+        node = FindNode(list, index-1); // the node BEFORE the one containing the indexed char
+
+    if (node->repetitions > 1) //if the indexed char is in this node
+        node->repetitions--;
+    else if (node->next->repetitions > 1) //next node is big
         node->next->repetitions--;
+    else //next node is size 1
+        NodeCutOff(node);
 
     list->size--;
     return RLE_LIST_SUCCESS;
