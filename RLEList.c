@@ -1,23 +1,24 @@
 //TODO: figure out if some "->" need to be replaced by "."
 
 #include "RLEList.h"
+#include "Node.h"
 #include <stdlib.h>
 #define NULL_POINTER_ERROR -1
 #define EMPTY '\0'
 #define CANT_GET 0
 
-typedef struct node{
+struct node{
     char symbol;
     int repetitions;
     struct node* next;
-} *Node;
+};
 
 struct RLEList_t{ // holds the first node of a chain
     Node first_node;
     int size;
 };
 
-Node NodeCreate(char input){
+Node NodeCreate(char input) {
     Node node = malloc(sizeof(*node));
     if (!node)
         return NULL;
@@ -81,26 +82,18 @@ int RLEListSize(RLEList list){
     return list->size;
 }
 
-void NodeCutOff(Node node){
-    /*
-     * receives a node with AT LEAST 1 following node.
-     * disconnects the node AFTER the given argument.
-     * given the list is nodes ABC and A is an argument: A->B->C --> A->C
-     */
+RLEListResult NodeCutOff(Node node) {
+    if (node->next == NULL)
+        return RLE_LIST_ERROR;
     if (node->next->next) //if C exists
         node->next = node->next->next; //A->B --> A->C
     else
         node->next = NULL; // A->NULL
     free(node->next); // B --> NULL
+    return RLE_LIST_SUCCESS;
 }
 
-Node FindNode(RLEList list, int index){
-    /*
-     * receives a list and an ---appropriate--- index shorter than list size.
-     * returns the node that holds the character with the index.
-     * example: given: (list = [A10,B10,C10], index = 15), returns B. if index>=20 returns C.
-     * is used in: RLEListRemove, RLEListGet.
-     */
+Node FindNode(RLEList list, int index) {
     Node node = list->first_node;
     int depth = 0;
     while (node->next->repetitions + depth < index){ // while (sum this far) < index
@@ -111,7 +104,7 @@ Node FindNode(RLEList list, int index){
     return node;
 }
 
-RLEListResult RLEListCheckArguments(RLEList list, int index){
+RLEListResult RLEListCheckArguments(RLEList list, int index) {
     if (!list || !index)
         return RLE_LIST_NULL_ARGUMENT;
     if (index >= list->size) // for example: index=0, size=1 is ok. but index=1 size=1 is not ok.
@@ -136,7 +129,9 @@ RLEListResult RLEListRemove(RLEList list, int index){
     else if (node->next->repetitions > 1) //next node is big
         node->next->repetitions--;
     else //next node is size 1
-        NodeCutOff(node);
+        if (NodeCutOff(node) == RLE_LIST_ERROR)
+            return RLE_LIST_ERROR;
+
 
     list->size--;
     return RLE_LIST_SUCCESS;
