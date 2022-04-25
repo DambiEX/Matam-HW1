@@ -3,9 +3,11 @@
 #include "RLEList.h"
 #include "Node.h"
 #include <stdlib.h>
+#include <string.h>
 #define NULL_POINTER_ERROR -1
 #define EMPTY '\0'
 #define CANT_GET 0
+#define STRING_LENGTH 3
 
 struct node{
     char symbol;
@@ -148,4 +150,46 @@ char RLEListGet(RLEList list, int index, RLEListResult *result){
 
     Node node = FindNode(list, index);
     return node->symbol;
+}
+
+RLEListResult RLEListMap(RLEList list, MapFunction map_function){
+    if (!list)
+        return RLE_LIST_NULL_ARGUMENT;
+    int size= RLEListSize(list);
+    for (int i=0; i<size; i++){
+        Node node= FindNode(list,i);
+        node->symbol=map_function(node->symbol);
+    }
+    return RLE_LIST_SUCCESS;
+}
+
+int nodes_amount(RLEList list){
+    Node node= list->first_node;
+    int counter=0;
+    while (node->next){
+        counter++;
+        node=node->next;
+    }
+    return counter;
+}
+
+char* RLEListExportToString(RLEList list, RLEListResult* result){
+    if (!list) {
+        *result = RLE_LIST_NULL_ARGUMENT;
+        return NULL;
+    }
+    Node node=list->first_node;
+    int size= nodes_amount(list);
+    char* export=malloc((sizeof(char)*size*STRING_LENGTH)+1);
+    for (int i=0;i<size;i++){
+        char *symbol=&node->symbol;
+        char reps=(char)node->repetitions;
+        char *repetitions=&reps;
+        char *new_line="\n";
+        strcat(symbol,repetitions);
+        strcat(symbol,new_line);
+        strcpy(&export[i],symbol);
+    }
+    *result=RLE_LIST_SUCCESS;
+    return export;
 }
