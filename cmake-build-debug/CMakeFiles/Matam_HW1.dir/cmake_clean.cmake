@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Matam_HW1.dir/AsciiArtTool.c.obj"
   "CMakeFiles/Matam_HW1.dir/RLEList.c.obj"
   "CMakeFiles/Matam_HW1.dir/main.c.obj"
   "Matam_HW1.exe"
