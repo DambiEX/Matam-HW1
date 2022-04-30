@@ -217,6 +217,37 @@ int nodes_amount(RLEList list) {
     return counter;
 }
 
+int repetitions_amount_of_digits(Node node){
+    int reps= node->repetitions;
+    int counter=0;
+    while (reps!=0){
+        reps=reps/10;
+        counter++;
+    }
+    return counter; //don't know if it will work
+}
+
+int total_amount_of_digits(RLEList list){
+    Node node=list->first_node;
+    int counter=0;
+    while (node->next){
+        counter+= repetitions_amount_of_digits(node);
+        node=node->next;
+    }
+    return counter;
+}
+
+
+char digit_by_index(int repetitions, int index){
+    repetitions= repetitions/(10^index);
+    int counter=0;
+    while(repetitions%10){
+        repetitions--;
+        counter++;
+    }
+    return (char)counter;
+}
+
 char *RLEListExportToString(RLEList list, RLEListResult *result) {
     if (!list) {
         if (result)
@@ -227,21 +258,28 @@ char *RLEListExportToString(RLEList list, RLEListResult *result) {
     }
     Node node = list->first_node;
     int size = nodes_amount(list);
-    char *export = malloc((sizeof(char) * size * STRING_LENGTH) + 1);
+    char *export = malloc((sizeof(char) * size) + total_amount_of_digits(list) + 1);
     if (!export)
     {
         return NULL;
     }
-    for (int i = 0; i < (size * STRING_LENGTH); i += STRING_LENGTH) {
-        char *symbol = &node->symbol;
-        char reps = (char) node->repetitions;
-        char *repetitions = &reps;
-        char *new_line = "\n";
-        strcat(symbol, repetitions); // TODO: strcat into &node->symbol is a potential memory leak.
-        strcat(symbol, new_line);
-        strcpy(&export[i], symbol);
-    }
 
+    int j=0;
+    while (node->next){
+        int i=0;
+        char *repetitions= malloc(sizeof(char) * repetitions_amount_of_digits(node));
+        if (!repetitions)
+            return NULL;
+        export[j++]=node->symbol;
+        //for example: if node->repetitions=4621, the loop will run 4 times, each time entering the next digit into the string
+        while (repetitions[i]){
+            export[j++]= digit_by_index(node->repetitions, i);
+            i++;
+        }
+        free(repetitions);
+        export[j++]='\n';
+        node=node->next;
+    }
     *result = RLE_LIST_SUCCESS;
     export[size*STRING_LENGTH-1] = EMPTY; //TODO: maybe this line is not needed, maybe wrong index.
     return export;
@@ -261,3 +299,4 @@ RLEListResult RLEListPrintContent(RLEList list, FILE *destination) {
     }
     return RLE_LIST_SUCCESS;
 }
+
