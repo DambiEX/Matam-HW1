@@ -7,8 +7,14 @@
 #IncludeRegexTransform: 
 
 C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/AsciiArtTool.c
-RLEList.c
-C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/RLEList.c
+RLEList.h
+C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/RLEList.h
+Node.h
+C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/Node.h
+AsciiArtTool.h
+C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/AsciiArtTool.h
+
+C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/AsciiArtTool.h
 
 C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/Node.h
 
@@ -29,6 +35,8 @@ stdbool.h
 -
 
 C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/main.c
-AsciiArtTool.c
-C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/AsciiArtTool.c
+RLEList.h
+C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/RLEList.h
+AsciiArtTool.h
+C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/AsciiArtTool.h
 

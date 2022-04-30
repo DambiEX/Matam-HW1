@@ -5,6 +5,10 @@
 #ifndef MAIN_C_NODE_H
 #define MAIN_C_NODE_H
 
+#define NULL_POINTER_ERROR -1
+#define EMPTY '\0'
+#define CANT_GET 0
+#define STRING_LENGTH 3
 
 typedef struct node *Node;
 

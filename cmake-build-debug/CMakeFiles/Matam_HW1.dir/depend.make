@@ -3,16 +3,14 @@
 
 CMakeFiles/Matam_HW1.dir/AsciiArtTool.c.obj: \
  ../AsciiArtTool.c \
+ ../AsciiArtTool.h \
  ../Node.h \
- ../RLEList.c \
  ../RLEList.h
 CMakeFiles/Matam_HW1.dir/RLEList.c.obj: \
  ../Node.h \
  ../RLEList.c \
  ../RLEList.h
 CMakeFiles/Matam_HW1.dir/main.c.obj: \
- ../AsciiArtTool.c \
- ../Node.h \
- ../RLEList.c \
+ ../AsciiArtTool.h \
  ../RLEList.h \
  ../main.c

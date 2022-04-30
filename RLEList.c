@@ -4,10 +4,7 @@
 #include "Node.h"
 #include <stdlib.h>
 #include <string.h>
-#define NULL_POINTER_ERROR -1
-#define EMPTY '\0'
-#define CANT_GET 0
-#define STRING_LENGTH 3
+
 
 struct node{
     char symbol;
@@ -175,7 +172,8 @@ int nodes_amount(RLEList list){
 
 char* RLEListExportToString(RLEList list, RLEListResult* result){
     if (!list) {
-        *result = RLE_LIST_NULL_ARGUMENT;
+        if (result)
+            *result = RLE_LIST_NULL_ARGUMENT;
         return NULL;
     }
     Node node=list->first_node;

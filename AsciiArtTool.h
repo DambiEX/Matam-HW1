@@ -5,18 +5,13 @@
 #ifndef RLELIST_C_ASCIIARTTOOL_H
 #define RLELIST_C_ASCIIARTTOOL_H
 
-/**
- * Handles opening a file and errors that can happen while opening.
- *
- * @param source - The original file to be opened.
- * @param destination - The file pointer where the opened file will be.
- * @param flag - READ or WRITE.
- * @return
- *  RLE_LIST_NULL_ARGUMENT if one of the parameters is NULL.
- *  RLE_LIST_ERROR if failed opening the file.
- *  RLE_LIST_SUCCESS if opened the file successfully.
- */
-RLEListResult OpenFile (FILE* source, FILE** destination, char flag);
+#define READ "r"
+#define WRITE "w"
+#define AT_SIGN '@'
+#define SPACE ' '
+#define NULL_CHAR '\0'
+
+
 
 /**
  * Receives a text file and compresses it into an RLE List.
