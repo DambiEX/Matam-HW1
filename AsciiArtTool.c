@@ -5,31 +5,14 @@
 #define SPACE ' '
 #define NULL_CHAR '\0'
 
-RLEListResult OpenFile (FILE* source, FILE** destination, char flag){
+RLEListResult OpenFile(FILE *source, FILE *destination, char *flag) {
     if (!source)
         return RLE_LIST_NULL_ARGUMENT;
     FILE *file = fopen(source, flag); //TODO: close the file in case of error? is it needed?
     if (!file) //failed opening the file
         return RLE_LIST_ERROR; //TODO: return the right errors
-    *destination = file;
+    destination = file;
     return RLE_LIST_SUCCESS;
-}
-
-RLEListResult InvertNode(Node node){
-    if (!node)
-        return RLE_LIST_NULL_ARGUMENT;
-    else if (node->symbol == AT_SIGN)
-        node->symbol = SPACE;
-    else if (node->symbol == SPACE)
-        node->symbol = AT_SIGN;
-    return RLE_LIST_SUCCESS;
-}
-
-RLEListResult InvertList (RLEList list, char replacing, char replaced){
-    if (!list || !replacing || !replaced){
-        return RLE_LIST_NULL_ARGUMENT;
-    }
-    RLEListMap(list, InvertChar)
 }
 
 RLEList asciiArtRead(FILE* in_stream){
@@ -62,7 +45,7 @@ RLEListResult asciiArtPrint(RLEList list, FILE *out_stream){
     Node node = list->first_node;
     while (node->next){
         for (int i = 0; i < node->next->repetitions; ++i) {
-            fprintf(file, node->next->symbol); //TODO: nicer syntax to write all the repitions at once?
+            fprintf(file, &node->next->symbol); //TODO: nicer syntax to write all the repitions at once?
         }
     }
     fclose(file);
@@ -78,4 +61,13 @@ RLEListResult asciiArtPrintEncoded(RLEList list, FILE *out_stream){
     RLEListResult print_result;
     fprintf(RLEListExportToString(list, print_result), file);
     return print_result;
+}
+
+char InvertChar(char symbol) {
+    if (symbol == AT_SIGN)
+        return SPACE;
+    else if (symbol == SPACE)
+        return AT_SIGN;
+    else
+        return symbol;
 }

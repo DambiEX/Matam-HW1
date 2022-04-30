@@ -4,7 +4,32 @@
 #define FLAGGED '-'
 typedef char FLAG;
 
-RLEListResult ParseFlag (FLAG* destination, FLAG* source){
+// --------------- Functions to help parse the input -------------------- //
+RLEListResult ParseFlag (FLAG* destination, FLAG* source);
+RLEListResult UnpackInput(int argc, char **argv, FLAG* flag, FILE *source, FILE *destination);
+
+
+int main(int argc, char** argv){
+    FLAG flag;
+    FILE *source, *destination; //TODO: make sure pointer syntax is correct.
+    RLEListResult unpacked_success = UnpackInput(argc, argv, &flag, source, destination);
+    if (unpacked_success != RLE_LIST_SUCCESS)
+        return NULL_POINTER_ERROR;
+
+    RLEList list = asciiArtRead(source);
+
+    if (flag == ENCODED){
+        asciiArtPrintEncoded(list, destination);
+    }
+    else if (flag == INVERTED){
+        RLEListMap(list, InvertChar);
+        asciiArtPrint(list, destination);
+    }
+    return 0;
+
+}
+
+RLEListResult ParseFlag(FLAG *destination, FLAG *source) {
     if (source[0] == FLAGGED)
     {
         if (source[1] == ENCODED || source[1] == INVERTED)
@@ -19,9 +44,8 @@ RLEListResult ParseFlag (FLAG* destination, FLAG* source){
         return RLE_LIST_ERROR;
     return RLE_LIST_ERROR; //TODO: return error if (source[0] == NULL)?
 }
-
 RLEListResult UnpackInput(int argc, char **argv,
-                          FLAG* flag, FILE *source, FILE *destination){
+                          FLAG *flag, FILE *source, FILE *destination) {
     if (argc != 4) // 3 args + 1 default
         return RLE_LIST_NULL_ARGUMENT; // invalid amount of args
     RLEListResult valid_input = ParseFlag(flag, argv[1]);
@@ -34,20 +58,3 @@ RLEListResult UnpackInput(int argc, char **argv,
     return valid_input;
 }
 
-int main(int argc, char** argv){
-    FLAG flag;
-    FILE *source, *destination; //TODO: make sure pointer syntax is correct.
-    RLEListResult unpacked_success = UnpackInput(argc, argv, &flag, source, destination);
-    if (unpacked_success != RLE_LIST_SUCCESS)
-        return NULL;
-
-    RLEList list = asciiArtRead(source);
-
-    if (flag == ENCODED){
-        asciiArtPrintEncoded(list, destination);
-    }
-    else if (flag == INVERTED){
-        RLEListMap(list, InvertNode);
-    }
-
-}
