@@ -103,7 +103,7 @@ Node FindNode(RLEList list, int index) {
 }
 
 RLEListResult RLEListCheckArguments(RLEList list, int index) {
-    if (!list || !index)
+    if (!list)
         return RLE_LIST_NULL_ARGUMENT;
     if (index >= list->size) // for example: index=0, size=1 is ok. but index=1 size=1 is not ok.
         return RLE_LIST_INDEX_OUT_OF_BOUNDS;
@@ -150,11 +150,12 @@ char RLEListGet(RLEList list, int index, RLEListResult *result) {
 RLEListResult RLEListMap(RLEList list, MapFunction map_function) {
     if (!list)
         return RLE_LIST_NULL_ARGUMENT;
-    int size = RLEListSize(list);
-    for (int i = 0; i < size; i++) {
-        Node node = FindNode(list, i);
-        node->symbol = map_function(node->symbol);
+    Node node = list->first_node;
+    while (node->next){
+        node->next->symbol = map_function(node->next->symbol);
+        node = node->next;
     }
+    //node->symbol=map_function(node->symbol);
     return RLE_LIST_SUCCESS;
 }
 
@@ -193,7 +194,15 @@ char *RLEListExportToString(RLEList list, RLEListResult *result) {
     //export[size*STRING_LENGTH-1] = EMPTY; //TODO: maybe this line is not needed, maybe wrong index.
     return export;
 }
-
-void free_export(char *export) {
-    free(export);
+RLEListResult RLEListPrintContent(RLEList list, FILE *destination) {
+    if (!list || !destination)
+        return RLE_LIST_NULL_ARGUMENT;
+    Node node = list->first_node;
+    while (node->next){
+        for (int i = 0; i < node->next->repetitions; ++i) {
+            fprintf(destination, "%c", node->next->symbol);
+        }
+        node = node->next;
+    }
+    return RLE_LIST_SUCCESS;
 }

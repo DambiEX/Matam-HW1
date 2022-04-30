@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "RLEList.h"
+#include "Node.h"
 #include "AsciiArtTool.h"
 #define BUFFER_SIZE 100
 
@@ -11,7 +12,7 @@ RLEList asciiArtRead(FILE* in_stream){
     bool scan_success = true;
     while (scan_success)
     {
-        scan_success = fgets(content, BUFFER_SIZE, in_stream); //fscanf(in_stream, &content); //TODO: fix syntax
+        scan_success = fgets(content, BUFFER_SIZE, in_stream);
         for (int i = 0; (scan_success && content[i]); ++i) {
             RLEListAppend(list, content[i]);
         }
@@ -25,13 +26,9 @@ RLEList asciiArtRead(FILE* in_stream){
 
 RLEListResult asciiArtPrint(RLEList list, FILE *out_stream){
 
-
-    for (int i = 0; i < RLEListSize(list); ++i) {
-        fprintf(out_stream, "%c", RLEListGet(list, i, NULL)); //TODO: nicer syntax to write all the repetitions at once?
-    }
-
+    RLEListResult result = RLEListPrintContent(list, out_stream);
     fclose(out_stream);
-    return RLE_LIST_SUCCESS;
+    return result;
 }
 
 RLEListResult asciiArtPrintEncoded(RLEList list, FILE *out_stream){
@@ -41,7 +38,7 @@ RLEListResult asciiArtPrintEncoded(RLEList list, FILE *out_stream){
     if (print_result != RLE_LIST_SUCCESS)
         return print_result;
 
-    fprintf(out_stream, ExportedString);
+    fprintf(out_stream, "%s", ExportedString);
 
     fclose(out_stream);
     free_export(ExportedString);

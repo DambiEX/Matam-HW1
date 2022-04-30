@@ -65,4 +65,15 @@ RLEListResult NodeCutOff(Node node);
  */
 RLEListResult RLEListCheckArguments(RLEList list, int index);
 
+/**
+ * Unpacks the RLEList and prints it as a regular picture. un-encoded.
+ *
+ * @param list - RLEList object containing the symbols to be printed.
+ * @param destination - *FILE object to receive the printed string.
+ * @return
+ *  RLE_LIST_NULL_ARGUMENT if a NULL was sent as one of the parameters.
+ *  RLE_LIST_SUCCESS otherwise.
+ */
+RLEListResult RLEListPrintContent(RLEList list, FILE* destination);
+
 #endif //MAIN_C_NODE_H

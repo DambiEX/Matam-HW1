@@ -9,8 +9,6 @@
 #define WRITE "w"
 #define AT_SIGN '@'
 #define SPACE ' '
-#define NULL_CHAR '\0'
-
 
 
 /**
