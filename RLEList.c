@@ -179,7 +179,9 @@ char* RLEListExportToString(RLEList list, RLEListResult* result){
     Node node=list->first_node;
     int size= nodes_amount(list);
     char* export=malloc((sizeof(char)*size*STRING_LENGTH)+1);
-    for (int i=0;i<size;i++){
+    if (!export)
+        return NULL;
+    for (int i = 0; i < size; i++){
         char *symbol=&node->symbol;
         char reps=(char)node->repetitions;
         char *repetitions=&reps;
@@ -190,6 +192,6 @@ char* RLEListExportToString(RLEList list, RLEListResult* result){
     }
 
     *result=RLE_LIST_SUCCESS;
-    export[size*STRING_LENGTH] = EMPTY; //TODO: maybe this line is not needed, maybe wrong index.
+    //export[size*STRING_LENGTH-1] = EMPTY; //TODO: maybe this line is not needed, maybe wrong index.
     return export;
 }

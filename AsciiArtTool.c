@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include "RLEList.h"
-#include "Node.h"
 #include "AsciiArtTool.h"
 #define BUFFER_SIZE 100
 
@@ -39,9 +38,11 @@ RLEListResult asciiArtPrintEncoded(RLEList list, FILE *out_stream){
 
     RLEListResult print_result;
     char* ExportedString = RLEListExportToString(list, &print_result);
+    if (print_result != RLE_LIST_SUCCESS)
+        return print_result;
+
     fprintf(out_stream, ExportedString);
 
-    free(ExportedString);
     fclose(out_stream);
     return print_result;
 }
