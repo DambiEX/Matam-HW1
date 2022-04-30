@@ -1,6 +1,5 @@
 #include "RLEList.h"
 #include "AsciiArtTool.h"
-#include <stdlib.h>
 #define ENCODED 'e'
 #define INVERTED 'i'
 #define FLAGGED '-'
@@ -28,14 +27,8 @@ int main(int argc, char** argv){
     RLEListResult unpacked_success = UnpackInput(argc, argv, &flag, &source, &destination);
     if (unpacked_success != RLE_LIST_SUCCESS)
         return -1;
-    int* a = malloc(sizeof (int));
-    free(a);
-
 
     RLEList list = asciiArtRead(source);
-    int* B = malloc(sizeof (int));
-    free(B);
-
 
     if (flag == ENCODED){
         asciiArtPrintEncoded(list, destination);
@@ -49,7 +42,6 @@ int main(int argc, char** argv){
     return 0;
 
 }
-
 
 RLEListResult ParseFlag(FLAG *destination, FLAG *source) {
     if (source[0] == FLAGGED)
