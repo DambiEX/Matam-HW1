@@ -188,6 +188,8 @@ char* RLEListExportToString(RLEList list, RLEListResult* result){
         strcat(symbol,new_line);
         strcpy(&export[i],symbol);
     }
+
     *result=RLE_LIST_SUCCESS;
+    export[size*STRING_LENGTH] = EMPTY; //TODO: maybe this line is not needed, maybe wrong index.
     return export;
 }

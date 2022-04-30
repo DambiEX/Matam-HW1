@@ -17,14 +17,15 @@ typedef char FLAG;
  *  RLE_LIST_ERROR if failed opening the file.
  *  RLE_LIST_SUCCESS if opened the file successfully.
  */
-RLEListResult OpenFile(char* source, FILE *destination, char *flag);
+RLEListResult OpenFile(char *source, FILE **destination, char *flag);
 RLEListResult ParseFlag (FLAG* destination, FLAG* source);
-RLEListResult UnpackInput(int argc, char **argv, FLAG *flag, FILE *source, FILE *destination);
+RLEListResult UnpackInput(int argc, char **argv, FLAG *flag, FILE **source, FILE **destination);
 
 int main(int argc, char** argv){
     FLAG flag;
-    FILE *source, *destination; //TODO: make sure pointer syntax is correct.
-    RLEListResult unpacked_success = UnpackInput(argc, argv, &flag, source, destination);
+    FILE *source = NULL;
+    FILE *destination = NULL;
+    RLEListResult unpacked_success = UnpackInput(argc, argv, &flag, &source, &destination);
     if (unpacked_success != RLE_LIST_SUCCESS)
         return -1;
 
@@ -60,7 +61,17 @@ RLEListResult ParseFlag(FLAG *destination, FLAG *source) {
     return RLE_LIST_ERROR; //TODO: return error if (source[0] == NULL)?
 }
 
-RLEListResult UnpackInput(int argc, char **argv, FLAG *flag, FILE *source, FILE *destination) {
+RLEListResult OpenFile(char *source, FILE **destination, char *flag) {
+    if (!source)
+        return RLE_LIST_NULL_ARGUMENT;
+    FILE *file = fopen(source, flag); //TODO: close the file in case of error? is it needed?
+    if (!file) //failed opening the file
+        return RLE_LIST_ERROR; //TODO: return the right errors.
+    *destination = file; //TODO: make sure destination is really changed outside the function.
+    return RLE_LIST_SUCCESS;
+}
+
+RLEListResult UnpackInput(int argc, char **argv, FLAG *flag, FILE **source, FILE **destination) {
     if (argc != 4) // 3 args + 1 default
         return RLE_LIST_NULL_ARGUMENT; // invalid amount of args
     RLEListResult valid_input = ParseFlag(flag, argv[1]);
@@ -73,15 +84,6 @@ RLEListResult UnpackInput(int argc, char **argv, FLAG *flag, FILE *source, FILE 
     return valid_input;
 }
 
-RLEListResult OpenFile(char *source, FILE *destination, char *flag) {
-    if (!source)
-        return RLE_LIST_NULL_ARGUMENT;
-    FILE *file = fopen(source, flag); //TODO: close the file in case of error? is it needed?
-    if (!file) //failed opening the file
-        return RLE_LIST_ERROR; //TODO: return the right errors.
-    destination = file; //TODO: make sure destination is really changed outside the function.
-    return RLE_LIST_SUCCESS;
-}
 
 
 
