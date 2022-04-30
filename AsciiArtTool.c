@@ -44,7 +44,7 @@ RLEListResult asciiArtPrintEncoded(RLEList list, FILE *out_stream){
     fprintf(out_stream, ExportedString);
 
     fclose(out_stream);
-    free_export(ExportedString);
+    free(ExportedString);
     return print_result;
 }
 

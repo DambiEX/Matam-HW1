@@ -179,21 +179,13 @@ char *RLEListExportToString(RLEList list, RLEListResult *result) {
     char *export = malloc((sizeof(char) * size * STRING_LENGTH) + 1);
     if (!export)
         return NULL;
-    for (int i = 0; i < (size * STRING_LENGTH); i = i + 3) {
-        char *symbol = &node->symbol;
-        char reps = (char) node->repetitions;
-        char *repetitions = &reps;
-        char *new_line = "\n";
-        strcat(symbol, repetitions);
-        strcat(symbol, new_line);
-        strcpy(&export[i], symbol);
+    for (int i = 0; i < (size * STRING_LENGTH); i = i + 4) {
+        export[i] = node->symbol;
+        export[i + 1] = (char) node->repetitions;
+        export[i + 2] = '\\';
+        export[i + 3] = 'n';
     }
-
     *result = RLE_LIST_SUCCESS;
     //export[size*STRING_LENGTH-1] = EMPTY; //TODO: maybe this line is not needed, maybe wrong index.
     return export;
-}
-
-void free_export(char *export) {
-    free(export);
 }
