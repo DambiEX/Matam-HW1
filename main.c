@@ -17,7 +17,7 @@ typedef char FLAG;
  *  RLE_LIST_ERROR if failed opening the file.
  *  RLE_LIST_SUCCESS if opened the file successfully.
  */
-RLEListResult ParseFlag (FLAG* destination, FLAG* source);
+RLEListResult ParseFlag (FLAG* destination, const FLAG* source);
 RLEListResult UnpackInput(int argc, char **argv, FLAG *flag, FILE **source, FILE **destination);
 
 int main(int argc, char** argv){
@@ -45,7 +45,7 @@ int main(int argc, char** argv){
 
 }
 
-RLEListResult ParseFlag(FLAG *destination, FLAG *source) {
+RLEListResult ParseFlag(FLAG *destination, const FLAG *source) {
     if (source[0] == FLAGGED)
     {
         if (source[1] == ENCODED || source[1] == INVERTED)
