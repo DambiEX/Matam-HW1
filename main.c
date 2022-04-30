@@ -26,7 +26,9 @@ int main(int argc, char** argv){
     FILE *destination = NULL;
     RLEListResult unpacked_success = UnpackInput(argc, argv, &flag, &source, &destination);
     if (unpacked_success != RLE_LIST_SUCCESS)
+    {
         return -1;
+    }
 
     RLEList list = asciiArtRead(source);
 
@@ -52,25 +54,37 @@ RLEListResult ParseFlag(FLAG *destination, FLAG *source) {
             return RLE_LIST_SUCCESS;
         }
         else
+        {
             return RLE_LIST_ERROR;
+        }
     }
     else if (source[0]) // != NULL and != FLAGGED
+    {
         return RLE_LIST_ERROR;
+    }
     return RLE_LIST_ERROR; //TODO: return error if (source[0] == NULL)?
 }
 
 RLEListResult UnpackInput(int argc, char **argv, FLAG *flag, FILE **source, FILE **destination) {
     if (argc != 4) // 3 args + 1 default
+    {
         return RLE_LIST_NULL_ARGUMENT; // invalid amount of args
+    }
     RLEListResult valid_input = ParseFlag(flag, argv[1]);
     if (valid_input != RLE_LIST_SUCCESS)
+    {
         return valid_input;
+    }
     *source = fopen(argv[2], READ);
     if (!*source)
+    {
         return RLE_LIST_ERROR;
+    }
     *destination = fopen(argv[3], WRITE);
     if (!*destination)
+    {
         return RLE_LIST_ERROR;
+    }
 
     return valid_input;
 }
