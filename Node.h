@@ -9,6 +9,7 @@
 #define EMPTY '\0'
 #define CANT_GET 0
 #define SYMBOL_AND_NEW_LINE 2
+#define ERROR_MARGIN 255
 
 typedef struct node *Node;
 

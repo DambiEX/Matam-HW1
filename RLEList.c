@@ -208,8 +208,8 @@ int total_amount_of_digits(RLEList list) {
     Node node = list->first_node;
     int counter = 0;
     while (node->next) {
-        counter += repetitions_amount_of_digits(node);
         node = node->next;
+        counter += repetitions_amount_of_digits(node);
     }
     return counter;
 }
@@ -224,7 +224,7 @@ char digit_by_index(int repetitions, int index) {
     }
     return (char) counter;
 }
-
+/*
 char *RLEListExportToString(RLEList list, RLEListResult *result) {
     if (!list) {
         if (result) {
@@ -234,12 +234,13 @@ char *RLEListExportToString(RLEList list, RLEListResult *result) {
     }
     Node node = list->first_node;
     int size = nodes_amount(list);
-    char *export = malloc((sizeof(char) * size * SYMBOL_AND_NEW_LINE) + total_amount_of_digits(list) + 1);
+    char *export = malloc((sizeof(char) * size * SYMBOL_AND_NEW_LINE) + total_amount_of_digits(list) + ERROR_MARGIN);
     if (!export) {
         return NULL;
     }
     int j = 0;
     while (node->next) {
+        node = node->next;
         int i = 0;
         char *repetitions = malloc(sizeof(char) * repetitions_amount_of_digits(node));
         if (!repetitions) {
@@ -253,14 +254,13 @@ char *RLEListExportToString(RLEList list, RLEListResult *result) {
         }
         free(repetitions);
         export[j++] = '\n';
-        node = node->next;
     }
     *result = RLE_LIST_SUCCESS;
     export[j] = EMPTY;
     return export;
 }
+*/
 
-/*
 char *RLEListExportToString(RLEList list, RLEListResult *result) {
     if (!list) {
         if (result){
@@ -270,19 +270,18 @@ char *RLEListExportToString(RLEList list, RLEListResult *result) {
     }
     Node node = list->first_node;
     int size = nodes_amount(list);
-    char *export = malloc((sizeof(char) * size) + total_amount_of_digits(list) + 1);
+    char *export = malloc((sizeof(char) * size * SYMBOL_AND_NEW_LINE) + total_amount_of_digits(list) + ERROR_MARGIN);
     if (!export){
         return NULL;
         }
     export[0]=EMPTY;
     while (node->next){
-        sprintf(export+strlen(export),"%c%d\n\0",node->symbol, node->repetitions);
         node=node->next;
+        sprintf(export+strlen(export),"%c%d\n",node->symbol, node->repetitions);
     }
     *result = RLE_LIST_SUCCESS;
     return export;
 }
-*/
 
 RLEListResult RLEListPrintContent(RLEList list, FILE *destination) {
     if (!list || !destination) {
