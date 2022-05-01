@@ -74,12 +74,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/AsciiArtTool.c">
-			<Option target="Matam_HW1"/>
-		</Unit>
-		<Unit filename="C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/AsciiArtTool.h">
-			<Option target="Matam_HW1"/>
-		</Unit>
 		<Unit filename="C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/Node.h">
 			<Option target="Matam_HW1"/>
 		</Unit>
@@ -90,6 +84,12 @@
 			<Option target="Matam_HW1"/>
 		</Unit>
 		<Unit filename="C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/main.c">
+			<Option target="Matam_HW1"/>
+		</Unit>
+		<Unit filename="C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/tool/AsciiArtTool.c">
+			<Option target="Matam_HW1"/>
+		</Unit>
+		<Unit filename="C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/tool/AsciiArtTool.h">
 			<Option target="Matam_HW1"/>
 		</Unit>
 		<Unit filename="C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/CMakeLists.txt">

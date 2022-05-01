@@ -128,30 +128,6 @@ Matam_HW1/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/build
 .PHONY : Matam_HW1/fast
 
-AsciiArtTool.obj: AsciiArtTool.c.obj
-.PHONY : AsciiArtTool.obj
-
-# target to build an object file
-AsciiArtTool.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/AsciiArtTool.c.obj
-.PHONY : AsciiArtTool.c.obj
-
-AsciiArtTool.i: AsciiArtTool.c.i
-.PHONY : AsciiArtTool.i
-
-# target to preprocess a source file
-AsciiArtTool.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/AsciiArtTool.c.i
-.PHONY : AsciiArtTool.c.i
-
-AsciiArtTool.s: AsciiArtTool.c.s
-.PHONY : AsciiArtTool.s
-
-# target to generate assembly for a file
-AsciiArtTool.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/AsciiArtTool.c.s
-.PHONY : AsciiArtTool.c.s
-
 RLEList.obj: RLEList.c.obj
 .PHONY : RLEList.obj
 
@@ -200,6 +176,30 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/main.c.s
 .PHONY : main.c.s
 
+tool/AsciiArtTool.obj: tool/AsciiArtTool.c.obj
+.PHONY : tool/AsciiArtTool.obj
+
+# target to build an object file
+tool/AsciiArtTool.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/tool/AsciiArtTool.c.obj
+.PHONY : tool/AsciiArtTool.c.obj
+
+tool/AsciiArtTool.i: tool/AsciiArtTool.c.i
+.PHONY : tool/AsciiArtTool.i
+
+# target to preprocess a source file
+tool/AsciiArtTool.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/tool/AsciiArtTool.c.i
+.PHONY : tool/AsciiArtTool.c.i
+
+tool/AsciiArtTool.s: tool/AsciiArtTool.c.s
+.PHONY : tool/AsciiArtTool.s
+
+# target to generate assembly for a file
+tool/AsciiArtTool.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/tool/AsciiArtTool.c.s
+.PHONY : tool/AsciiArtTool.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -209,15 +209,15 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Matam_HW1
-	@echo ... AsciiArtTool.obj
-	@echo ... AsciiArtTool.i
-	@echo ... AsciiArtTool.s
 	@echo ... RLEList.obj
 	@echo ... RLEList.i
 	@echo ... RLEList.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... tool/AsciiArtTool.obj
+	@echo ... tool/AsciiArtTool.i
+	@echo ... tool/AsciiArtTool.s
 .PHONY : help
 
 

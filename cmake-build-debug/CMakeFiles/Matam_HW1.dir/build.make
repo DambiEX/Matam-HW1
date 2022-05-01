@@ -91,31 +91,31 @@ CMakeFiles/Matam_HW1.dir/RLEList.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Matam_HW1.dir/RLEList.c.s"
 	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\PC\Dropbox\introtomadmahbackup\HW1\Matam-HW1\RLEList.c -o CMakeFiles\Matam_HW1.dir\RLEList.c.s
 
-CMakeFiles/Matam_HW1.dir/AsciiArtTool.c.obj: CMakeFiles/Matam_HW1.dir/flags.make
-CMakeFiles/Matam_HW1.dir/AsciiArtTool.c.obj: ../AsciiArtTool.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\PC\Dropbox\introtomadmahbackup\HW1\Matam-HW1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Matam_HW1.dir/AsciiArtTool.c.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Matam_HW1.dir\AsciiArtTool.c.obj -c C:\Users\PC\Dropbox\introtomadmahbackup\HW1\Matam-HW1\AsciiArtTool.c
+CMakeFiles/Matam_HW1.dir/tool/AsciiArtTool.c.obj: CMakeFiles/Matam_HW1.dir/flags.make
+CMakeFiles/Matam_HW1.dir/tool/AsciiArtTool.c.obj: ../tool/AsciiArtTool.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\PC\Dropbox\introtomadmahbackup\HW1\Matam-HW1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Matam_HW1.dir/tool/AsciiArtTool.c.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Matam_HW1.dir\tool\AsciiArtTool.c.obj -c C:\Users\PC\Dropbox\introtomadmahbackup\HW1\Matam-HW1\tool\AsciiArtTool.c
 
-CMakeFiles/Matam_HW1.dir/AsciiArtTool.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Matam_HW1.dir/AsciiArtTool.c.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\PC\Dropbox\introtomadmahbackup\HW1\Matam-HW1\AsciiArtTool.c > CMakeFiles\Matam_HW1.dir\AsciiArtTool.c.i
+CMakeFiles/Matam_HW1.dir/tool/AsciiArtTool.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Matam_HW1.dir/tool/AsciiArtTool.c.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\PC\Dropbox\introtomadmahbackup\HW1\Matam-HW1\tool\AsciiArtTool.c > CMakeFiles\Matam_HW1.dir\tool\AsciiArtTool.c.i
 
-CMakeFiles/Matam_HW1.dir/AsciiArtTool.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Matam_HW1.dir/AsciiArtTool.c.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\PC\Dropbox\introtomadmahbackup\HW1\Matam-HW1\AsciiArtTool.c -o CMakeFiles\Matam_HW1.dir\AsciiArtTool.c.s
+CMakeFiles/Matam_HW1.dir/tool/AsciiArtTool.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Matam_HW1.dir/tool/AsciiArtTool.c.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\PC\Dropbox\introtomadmahbackup\HW1\Matam-HW1\tool\AsciiArtTool.c -o CMakeFiles\Matam_HW1.dir\tool\AsciiArtTool.c.s
 
 # Object files for target Matam_HW1
 Matam_HW1_OBJECTS = \
 "CMakeFiles/Matam_HW1.dir/main.c.obj" \
 "CMakeFiles/Matam_HW1.dir/RLEList.c.obj" \
-"CMakeFiles/Matam_HW1.dir/AsciiArtTool.c.obj"
+"CMakeFiles/Matam_HW1.dir/tool/AsciiArtTool.c.obj"
 
 # External object files for target Matam_HW1
 Matam_HW1_EXTERNAL_OBJECTS =
 
 Matam_HW1.exe: CMakeFiles/Matam_HW1.dir/main.c.obj
 Matam_HW1.exe: CMakeFiles/Matam_HW1.dir/RLEList.c.obj
-Matam_HW1.exe: CMakeFiles/Matam_HW1.dir/AsciiArtTool.c.obj
+Matam_HW1.exe: CMakeFiles/Matam_HW1.dir/tool/AsciiArtTool.c.obj
 Matam_HW1.exe: CMakeFiles/Matam_HW1.dir/build.make
 Matam_HW1.exe: CMakeFiles/Matam_HW1.dir/linklibs.rsp
 Matam_HW1.exe: CMakeFiles/Matam_HW1.dir/objects1.rsp
