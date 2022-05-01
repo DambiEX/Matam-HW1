@@ -214,53 +214,6 @@ int total_amount_of_digits(RLEList list) {
     return counter;
 }
 
-
-char digit_by_index(int repetitions, int index) {
-    repetitions = repetitions / (int) (pow(10, index));
-    int counter = 0;
-    while (repetitions % 10) {
-        repetitions--;
-        counter++;
-    }
-    return (char) counter;
-}
-/*
-char *RLEListExportToString(RLEList list, RLEListResult *result) {
-    if (!list) {
-        if (result) {
-            *result = RLE_LIST_NULL_ARGUMENT;
-        }
-        return NULL;
-    }
-    Node node = list->first_node;
-    int size = nodes_amount(list);
-    char *export = malloc((sizeof(char) * size * SYMBOL_AND_NEW_LINE) + total_amount_of_digits(list) + ERROR_MARGIN);
-    if (!export) {
-        return NULL;
-    }
-    int j = 0;
-    while (node->next) {
-        node = node->next;
-        int i = 0;
-        char *repetitions = malloc(sizeof(char) * repetitions_amount_of_digits(node));
-        if (!repetitions) {
-            return NULL;
-        }
-        export[j++] = node->symbol;
-        //for example: if node->repetitions=4621, the loop will run 4 times, each time entering the next digit into the string
-        while (repetitions[i]) {
-            export[j++] = digit_by_index(node->repetitions, i);
-            i++;
-        }
-        free(repetitions);
-        export[j++] = '\n';
-    }
-    *result = RLE_LIST_SUCCESS;
-    export[j] = EMPTY;
-    return export;
-}
-*/
-
 char *RLEListExportToString(RLEList list, RLEListResult *result) {
     if (!list) {
         if (result){
