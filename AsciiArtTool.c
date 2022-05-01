@@ -41,11 +41,11 @@ RLEListResult asciiArtPrintEncoded(RLEList list, FILE *out_stream){
     {
         return print_result;
     }
-
-    fprintf(out_stream, "%s", ExportedString);
+    fputs(ExportedString, out_stream);
 
     fclose(out_stream);
     free(ExportedString);
+
     return print_result;
 }
 
