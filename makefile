@@ -1,7 +1,7 @@
 CC = gcc
 OBJS = RLEList.o AsciiArtTool.o main.o
 DEBUG_FLAG =
-COMP_FLAG = -std=c99 -Wall -Werror
+COMP_FLAG = -std=c99 -Wall -Werror -I/home/mtm/public/2122b/ex1
 VPATH = tool
 
 AsciiArtTool: $(OBJS)
