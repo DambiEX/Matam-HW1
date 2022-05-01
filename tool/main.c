@@ -1,5 +1,5 @@
-#include "RLEList.h"
-#include "tool/AsciiArtTool.h"
+#include "../RLEList.h"
+#include "../tool/AsciiArtTool.h"
 #define ENCODED 'e'
 #define INVERTED 'i'
 #define FLAGGED '-'

@@ -152,30 +152,6 @@ RLEList.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/RLEList.c.s
 .PHONY : RLEList.c.s
 
-main.obj: main.c.obj
-.PHONY : main.obj
-
-# target to build an object file
-main.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/main.c.obj
-.PHONY : main.c.obj
-
-main.i: main.c.i
-.PHONY : main.i
-
-# target to preprocess a source file
-main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/main.c.i
-.PHONY : main.c.i
-
-main.s: main.c.s
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/main.c.s
-.PHONY : main.c.s
-
 tool/AsciiArtTool.obj: tool/AsciiArtTool.c.obj
 .PHONY : tool/AsciiArtTool.obj
 
@@ -200,6 +176,30 @@ tool/AsciiArtTool.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/tool/AsciiArtTool.c.s
 .PHONY : tool/AsciiArtTool.c.s
 
+tool/main.obj: tool/main.c.obj
+.PHONY : tool/main.obj
+
+# target to build an object file
+tool/main.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/tool/main.c.obj
+.PHONY : tool/main.c.obj
+
+tool/main.i: tool/main.c.i
+.PHONY : tool/main.i
+
+# target to preprocess a source file
+tool/main.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/tool/main.c.i
+.PHONY : tool/main.c.i
+
+tool/main.s: tool/main.c.s
+.PHONY : tool/main.s
+
+# target to generate assembly for a file
+tool/main.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Matam_HW1.dir\build.make CMakeFiles/Matam_HW1.dir/tool/main.c.s
+.PHONY : tool/main.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -212,12 +212,12 @@ help:
 	@echo ... RLEList.obj
 	@echo ... RLEList.i
 	@echo ... RLEList.s
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
 	@echo ... tool/AsciiArtTool.obj
 	@echo ... tool/AsciiArtTool.i
 	@echo ... tool/AsciiArtTool.s
+	@echo ... tool/main.obj
+	@echo ... tool/main.i
+	@echo ... tool/main.s
 .PHONY : help
 
 
