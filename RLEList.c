@@ -8,8 +8,6 @@
 #include "Node.h"
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
-
 
 struct node {
     char symbol;
@@ -216,23 +214,28 @@ int total_amount_of_digits(RLEList list) {
 
 char *RLEListExportToString(RLEList list, RLEListResult *result) {
     if (!list) {
-        if (result){
+        if (result) {
             *result = RLE_LIST_NULL_ARGUMENT;
-            }
+        }
         return NULL;
     }
     Node node = list->first_node;
     int size = nodes_amount(list);
     char *export = malloc((sizeof(char) * size * SYMBOL_AND_NEW_LINE) + total_amount_of_digits(list) + ERROR_MARGIN);
-    if (!export){
-        return NULL;
+    if (!export) {
+        if (result) {
+            *result = RLE_LIST_OUT_OF_MEMORY;
         }
-    export[0]=EMPTY;
-    while (node->next){
-        node=node->next;
-        sprintf(export+strlen(export),"%c%d\n",node->symbol, node->repetitions);
+        return NULL;
     }
-    *result = RLE_LIST_SUCCESS;
+    export[0] = EMPTY;
+    while (node->next) {
+        node = node->next;
+        sprintf(export + strlen(export), "%c%d\n", node->symbol, node->repetitions);
+    }
+    if (result) {
+        *result = RLE_LIST_SUCCESS;
+    }
     return export;
 }
 
