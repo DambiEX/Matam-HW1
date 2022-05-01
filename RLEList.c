@@ -1,4 +1,8 @@
-//TODO: figure out if some "->" need to be replaced by "."
+/*
+ * TODO: code conventions: add {} after EVERY if and and while.
+ * TODO: code conventions: make helper functions static? maybe remove Node.h. may take a while.
+ */
+
 
 #include "RLEList.h"
 #include "Node.h"
@@ -20,7 +24,9 @@ struct RLEList_t { // holds the first node of a chain
 Node NodeCreate(char input) {
     Node node = malloc(sizeof(*node));
     if (!node)
+    {
         return NULL;
+    }
     node->next = NULL;
     node->symbol = input;
     node->repetitions = 1;
@@ -30,17 +36,23 @@ Node NodeCreate(char input) {
 RLEList RLEListCreate() {
     RLEList list = malloc(sizeof(*list));
     if (!list)
+    {
         return NULL; //requested error value is NULL
+    }
     list->first_node = NodeCreate(EMPTY);
     if (!list->first_node)
+    {
         return NULL;
+    }
     list->size = 0;
     return list;
 }
 
 void RLEListDestroy(RLEList list) {
     if (!list)
+    {
         return;
+    }
     Node head = list->first_node;
     Node temp;
     while (head->next) {
@@ -54,7 +66,9 @@ void RLEListDestroy(RLEList list) {
 
 RLEListResult RLEListAppend(RLEList list, char input) {
     if (!list || !input)
+    {
         return RLE_LIST_NULL_ARGUMENT;
+    }
 
     Node last_node = list->first_node;
     while (last_node->next) {
@@ -62,11 +76,15 @@ RLEListResult RLEListAppend(RLEList list, char input) {
     }
 
     if (input == last_node->symbol)
+    {
         last_node->repetitions++;
+    }
     else {
         Node new_node = NodeCreate(input);
         if (!new_node)
+        {
             return RLE_LIST_OUT_OF_MEMORY;
+        }
         last_node->next = new_node;
     }
 
@@ -76,17 +94,25 @@ RLEListResult RLEListAppend(RLEList list, char input) {
 
 int RLEListSize(RLEList list) {
     if (!list)
+    {
         return NULL_POINTER_ERROR;
+    }
     return list->size;
 }
 
 RLEListResult NodeCutOff(Node node) {
     if (node->next == NULL)
+    {
         return RLE_LIST_ERROR;
+    }
     if (node->next->next) //if C exists
+    {
         node->next = node->next->next; //A->B --> A->C
+    }
     else
+    {
         node->next = NULL; // A->NULL
+    }
     free(node->next); // B --> NULL
     return RLE_LIST_SUCCESS;
 }
@@ -103,32 +129,50 @@ Node FindNode(RLEList list, int index) {
 }
 
 RLEListResult RLEListCheckArguments(RLEList list, int index) {
-    if (!list || !index)
+    if (!list)
+    {
         return RLE_LIST_NULL_ARGUMENT;
+    }
     if (index >= list->size) // for example: index=0, size=1 is ok. but index=1 size=1 is not ok.
+    {
         return RLE_LIST_INDEX_OUT_OF_BOUNDS;
+    }
     else
+    {
         return RLE_LIST_SUCCESS;
+    }
 }
 
 RLEListResult RLEListRemove(RLEList list, int index) {
     RLEListResult check = RLEListCheckArguments(list, index);
     if (check != RLE_LIST_SUCCESS)
+    {
         return check;
+    }
 
     Node node;
     if (index == 0)
+    {
         node = list->first_node;
+    }
     else
+    {
         node = FindNode(list, index - 1); // the node BEFORE the one containing the indexed char
+    }
 
     if (node->repetitions > 1) //if the indexed char is in this node
+    {
         node->repetitions--;
+    }
     else if (node->next->repetitions > 1) //next node is big
+    {
         node->next->repetitions--;
-    else //next node is size 1
-    if (NodeCutOff(node) == RLE_LIST_ERROR)
-        return RLE_LIST_ERROR;
+    }
+    else if (NodeCutOff(node) == RLE_LIST_ERROR) //next node is size 1
+        {
+            return RLE_LIST_ERROR;
+        }
+
 
 
     list->size--;
@@ -138,7 +182,9 @@ RLEListResult RLEListRemove(RLEList list, int index) {
 char RLEListGet(RLEList list, int index, RLEListResult *result) {
     RLEListResult check = RLEListCheckArguments(list, index);
     if (result)
+    {
         *result = check;
+    }
     if (check != RLE_LIST_SUCCESS) {
         return CANT_GET;
     }
@@ -149,12 +195,15 @@ char RLEListGet(RLEList list, int index, RLEListResult *result) {
 
 RLEListResult RLEListMap(RLEList list, MapFunction map_function) {
     if (!list)
+    {
         return RLE_LIST_NULL_ARGUMENT;
-    int size = RLEListSize(list);
-    for (int i = 0; i < size; i++) {
-        Node node = FindNode(list, i);
-        node->symbol = map_function(node->symbol);
     }
+    Node node = list->first_node;
+    while (node->next){
+        node->next->symbol = map_function(node->next->symbol);
+        node = node->next;
+    }
+    //node->symbol=map_function(node->symbol);
     return RLE_LIST_SUCCESS;
 }
 
@@ -202,18 +251,30 @@ char digit_by_index(int repetitions, int index) {
 char *RLEListExportToString(RLEList list, RLEListResult *result) {
     if (!list) {
         if (result)
+        {
             *result = RLE_LIST_NULL_ARGUMENT;
+        }
         return NULL;
     }
     Node node = list->first_node;
     int size = nodes_amount(list);
     char *export = malloc((sizeof(char) * size) + total_amount_of_digits(list) + 1);
     if (!export)
+    {
         return NULL;
+<<<<<<< HEAD
     int j = 0;
     while (node->next) {
         int i = 0;
         char *repetitions = malloc(sizeof(char) * repetitions_amount_of_digits(node));
+=======
+    }
+
+    int j=0;
+    while (node->next){
+        int i=0;
+        char *repetitions= malloc(sizeof(char) * repetitions_amount_of_digits(node));
+>>>>>>> 2011cda5a9d05cb41c9392f4c62dcd5b4dc51a46
         if (!repetitions)
             return NULL;
         export[j++] = node->symbol;
@@ -227,10 +288,11 @@ char *RLEListExportToString(RLEList list, RLEListResult *result) {
         node = node->next;
     }
     *result = RLE_LIST_SUCCESS;
-    //export[size*STRING_LENGTH-1] = EMPTY; //TODO: maybe this line is not needed, maybe wrong index.
+    export[size*STRING_LENGTH-1] = EMPTY; //TODO: maybe this line is not needed, maybe wrong index.
     return export;
 }
 
+<<<<<<< HEAD
 
 /*
 char *RLEListExportToString(RLEList list, RLEListResult *result) {
@@ -253,3 +315,20 @@ char *RLEListExportToString(RLEList list, RLEListResult *result) {
     return export;
 }
 */
+=======
+RLEListResult RLEListPrintContent(RLEList list, FILE *destination) {
+    if (!list || !destination)
+    {
+        return RLE_LIST_NULL_ARGUMENT;
+    }
+    Node node = list->first_node;
+    while (node->next){
+        for (int i = 0; i < node->next->repetitions; ++i) {
+            fprintf(destination, "%c", node->next->symbol);
+        }
+        node = node->next;
+    }
+    return RLE_LIST_SUCCESS;
+}
+
+>>>>>>> 2011cda5a9d05cb41c9392f4c62dcd5b4dc51a46
