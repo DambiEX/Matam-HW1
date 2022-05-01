@@ -197,6 +197,28 @@ char* RLEListExportToString(RLEList list, RLEListResult* result){
     return export;
 }
 
+/*
+char *RLEListExportToString(RLEList list, RLEListResult *result) {
+    if (!list) {
+        if (result)
+            *result = RLE_LIST_NULL_ARGUMENT;
+        return NULL;
+    }
+    Node node = list->first_node;
+    int size = nodes_amount(list);
+    char *export = malloc((sizeof(char) * size) + total_amount_of_digits(list) + 1);
+    if (!export)
+        return NULL;
+    export[0]='\0';
+    while (node->next){
+        sprintf(export+strlen(export),"%c%d\n",node->symbol, node->repetitions);
+        node=node->next;
+    }
+    *result = RLE_LIST_SUCCESS;
+    return export;
+}
+*/
+
 RLEListResult RLEListPrintContent(RLEList list, FILE *destination) {
     if (!list || !destination)
         return RLE_LIST_NULL_ARGUMENT;
