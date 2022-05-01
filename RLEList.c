@@ -259,22 +259,13 @@ char *RLEListExportToString(RLEList list, RLEListResult *result) {
     Node node = list->first_node;
     int size = nodes_amount(list);
     char *export = malloc((sizeof(char) * size) + total_amount_of_digits(list) + 1);
-    if (!export)
-    {
+    if (!export) {
         return NULL;
-<<<<<<< HEAD
-    int j = 0;
-    while (node->next) {
-        int i = 0;
-        char *repetitions = malloc(sizeof(char) * repetitions_amount_of_digits(node));
-=======
     }
-
-    int j=0;
+    int j = 0;
     while (node->next){
         int i=0;
         char *repetitions= malloc(sizeof(char) * repetitions_amount_of_digits(node));
->>>>>>> 2011cda5a9d05cb41c9392f4c62dcd5b4dc51a46
         if (!repetitions)
             return NULL;
         export[j++] = node->symbol;
@@ -291,8 +282,6 @@ char *RLEListExportToString(RLEList list, RLEListResult *result) {
     export[size*STRING_LENGTH-1] = EMPTY; //TODO: maybe this line is not needed, maybe wrong index.
     return export;
 }
-
-<<<<<<< HEAD
 
 /*
 char *RLEListExportToString(RLEList list, RLEListResult *result) {
@@ -315,7 +304,7 @@ char *RLEListExportToString(RLEList list, RLEListResult *result) {
     return export;
 }
 */
-=======
+
 RLEListResult RLEListPrintContent(RLEList list, FILE *destination) {
     if (!list || !destination)
     {
@@ -330,5 +319,3 @@ RLEListResult RLEListPrintContent(RLEList list, FILE *destination) {
     }
     return RLE_LIST_SUCCESS;
 }
-
->>>>>>> 2011cda5a9d05cb41c9392f4c62dcd5b4dc51a46
