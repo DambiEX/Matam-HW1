@@ -8,7 +8,7 @@
 #define NULL_POINTER_ERROR -1
 #define EMPTY '\0'
 #define CANT_GET 0
-#define STRING_LENGTH 3
+#define SYMBOL_AND_NEW_LINE 2
 
 typedef struct node *Node;
 

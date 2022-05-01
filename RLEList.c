@@ -274,7 +274,7 @@ char *RLEListExportToString(RLEList list, RLEListResult *result) {
     if (!export){
         return NULL;
         }
-    export[0]='\0';
+    export[0]=EMPTY;
     while (node->next){
         sprintf(export+strlen(export),"%c%d\n\0",node->symbol, node->repetitions);
         node=node->next;
