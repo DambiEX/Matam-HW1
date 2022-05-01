@@ -7,6 +7,8 @@
 #IncludeRegexTransform: 
 
 C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/Node.h
+RLEList.h
+C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/RLEList.h
 
 C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/RLEList.c
 RLEList.h
@@ -35,6 +37,10 @@ AsciiArtTool.h
 C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/tool/AsciiArtTool.h
 
 C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/tool/AsciiArtTool.h
+../RLEList.h
+C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/RLEList.h
+../Node.h
+C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/Node.h
 
 C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/tool/main.c
 ../RLEList.h

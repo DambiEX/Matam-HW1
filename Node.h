@@ -5,6 +5,8 @@
 #ifndef MAIN_C_NODE_H
 #define MAIN_C_NODE_H
 
+#include "RLEList.h"
+
 #define NULL_POINTER_ERROR -1
 #define EMPTY '\0'
 #define CANT_GET 0

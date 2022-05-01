@@ -5,6 +5,9 @@
 #ifndef RLELIST_C_ASCIIARTTOOL_H
 #define RLELIST_C_ASCIIARTTOOL_H
 
+#include "../RLEList.h"
+#include "../Node.h"
+
 #define READ "r"
 #define WRITE "w"
 #define AT_SIGN '@'
