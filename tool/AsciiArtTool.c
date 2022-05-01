@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include "RLEList.h"
-#include "Node.h" //TODO: remove node.h and find a solution that uses the minimal number of external modules
+#include "../RLEList.h"
+#include "../Node.h" //TODO: remove node.h and find a solution that uses the minimal number of external modules
 #include "AsciiArtTool.h"
 #define BUFFER_SIZE 100
 

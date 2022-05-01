@@ -8,9 +8,9 @@ AsciiArtTool: main.o AsciiArtTool.o RLEList.o
 
 RLEList.o: RLEList.c RLEList.h Node.h
 	$(CC) -c $(DEBUG_FLAG) $(COMP_FLAG) $*.c
-AsciiArtTool.o: AsciiArtTool.c AsciiArtTool.h RLEList.h Node.h
+AsciiArtTool.o: tool/AsciiArtTool.c tool/AsciiArtTool.h RLEList.h Node.h
 	$(CC) -c $(DEBUG_FLAG) $(COMP_FLAG) $*.c
-main.o: main.c AsciiArtTool.h RLEList.h
+main.o: main.c tool/AsciiArtTool.h RLEList.h
 	$(CC) -c $(DEBUG_FLAG) $(COMP_FLAG) $*.c
 
 clean:
