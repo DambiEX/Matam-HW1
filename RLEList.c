@@ -8,6 +8,7 @@
 #include "Node.h"
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 
 struct node {
@@ -239,7 +240,7 @@ int total_amount_of_digits(RLEList list) {
 
 
 char digit_by_index(int repetitions, int index) {
-    repetitions = repetitions / (10 ^ index);
+    repetitions = repetitions / (int)(pow(10,index));
     int counter = 0;
     while (repetitions % 10) {
         repetitions--;
