@@ -4,14 +4,14 @@ DEBUG_FLAG =
 COMP_FLAG = -std=c99 -Wall -Werror
 VPATH = tool
 
-AsciiArtTool: main.o AsciiArtTool.o RLEList.o
-	gcc main.o AsciiArtTool.o RLEList.o -o AsciiArtTool
+AsciiArtTool: $(OBJS)
+	gcc $(OBJS) -o AsciiArtTool
 
 RLEList.o: RLEList.c RLEList.h Node.h
 	$(CC) -c $(DEBUG_FLAG) $(COMP_FLAG) $*.c
-AsciiArtTool.o: tool/AsciiArtTool.c tool/AsciiArtTool.h RLEList.h Node.h
+AsciiArtTool.o: ./tool/AsciiArtTool.c ./tool/AsciiArtTool.h RLEList.h Node.h
 	$(CC) -c $(DEBUG_FLAG) $(COMP_FLAG) $*.c
-main.o: main.c tool/AsciiArtTool.h RLEList.h
+main.o: main.c ./tool/AsciiArtTool.h RLEList.h
 	$(CC) -c $(DEBUG_FLAG) $(COMP_FLAG) $*.c
 
 clean:
