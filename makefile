@@ -2,6 +2,7 @@ CC = gcc
 OBJS = RLEList.o AsciiArtTool.o main.o
 DEBUG_FLAG =
 COMP_FLAG = -std=c99 -Wall -Werror
+VPATH = /tool
 
 AsciiArtTool: main.o AsciiArtTool.o RLEList.o
 	gcc main.o AsciiArtTool.o RLEList.o -o AsciiArtTool
