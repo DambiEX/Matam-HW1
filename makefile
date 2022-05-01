@@ -1,18 +1,17 @@
 CC = gcc
-OBJS = RLEList.o AsciiArtTool.o main.o
-DEBUG_FLAG =
-COMP_FLAG = -std=c99 -Wall -Werror -I/home/mtm/public/2122b/ex1
-VPATH = tool
+
+OBJS=RLEList.o AsciiArtTool.o main.o
+DEBUG_FLAG=
+COMP_FLAGS=-std=c99 -Wall -Werror -I/home/mtm/public/2122b/ex1 -I/tool -Wall -pedantic-errors -Werror -DNDEBUG *.c tool/*.c
 
 AsciiArtTool: $(OBJS)
-	gcc $(OBJS) -o AsciiArtTool
+	$(CC) $(OBJS) -o AsciiArtTool
 
-RLEList.o: RLEList.c RLEList.h Node.h
-	$(CC) -c $(DEBUG_FLAG) $(COMP_FLAG) $*.c
-AsciiArtTool.o: tool/AsciiArtTool.c tool/AsciiArtTool.h RLEList.h Node.h
-	$(CC) -c $(DEBUG_FLAG) $(COMP_FLAG) tool/AsciiArtTool.c
-main.o: tool/main.c tool/AsciiArtTool.h RLEList.h
-	$(CC) -c $(DEBUG_FLAG) $(COMP_FLAG) tool/main.c
+RLEList.o: RLEList.c Node.h
+
+AsciiArtTool.o: tool/AsciiArtTool.c tool/AsciiArtTool.h Node.h
+
+main.o: tool/main.c tool/AsciiArtTool.h
 
 clean:
 	rm -f $(OBJS) $(EXEC)
