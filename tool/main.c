@@ -31,6 +31,11 @@ int main(int argc, char** argv){
     }
 
     RLEList list = asciiArtRead(source);
+    if (NULL == list) {
+        fclose(source);
+        fclose(destination);
+        return -1;
+    }
 
     if (flag == ENCODED){
         asciiArtPrintEncoded(list, destination);
@@ -41,6 +46,7 @@ int main(int argc, char** argv){
     }
 
     RLEListDestroy(list);
+    fclose(destination);
     return 0;
 
 }
@@ -83,6 +89,7 @@ RLEListResult UnpackInput(int argc, char **argv, FLAG *flag, FILE **source, FILE
     *destination = fopen(argv[3], WRITE);
     if (!*destination)
     {
+        fclose(*source);
         return RLE_LIST_ERROR;
     }
 

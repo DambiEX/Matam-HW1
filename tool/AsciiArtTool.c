@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include "RLEList.h"
-#include "Node.h" //TODO: remove node.h and find a solution that uses the minimal number of external modules
+#include "../Node.h" //TODO: remove node.h and find a solution that uses the minimal number of external modules
 #include "AsciiArtTool.h"
 #define BUFFER_SIZE 100
 
@@ -20,16 +20,16 @@ RLEList asciiArtRead(FILE* in_stream){
 
     if (RLEListSize(list) == 0) //received an empty in_stream
     {
+        RLEListDestroy(list);
         return NULL;
     }
-    fclose(in_stream);
+
     return list;
 }
 
 RLEListResult asciiArtPrint(RLEList list, FILE *out_stream){
 
     RLEListResult result = RLEListPrintContent(list, out_stream);
-    fclose(out_stream);
     return result;
 }
 
@@ -43,7 +43,6 @@ RLEListResult asciiArtPrintEncoded(RLEList list, FILE *out_stream){
     }
     fputs(ExportedString, out_stream);
 
-    fclose(out_stream);
     free(ExportedString);
 
     return print_result;

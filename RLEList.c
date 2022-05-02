@@ -40,6 +40,8 @@ RLEList RLEListCreate() {
     if (!list->first_node) {
         return NULL;
     }
+    list->first_node->repetitions = 0;
+    list->first_node->symbol = '\0';
     list->size = 0;
     return list;
 }
@@ -78,8 +80,8 @@ RLEListResult RLEListAppend(RLEList list, char input) {
         }
         last_node->next = new_node;
     }
-
     list->size++;
+
     return RLE_LIST_SUCCESS;
 }
 
@@ -90,24 +92,40 @@ int RLEListSize(RLEList list) {
     return list->size;
 }
 
+int deleteNextNode(Node node){
+    Node temp=node->next;
+    node->next=temp->next;
+    int counter=temp->repetitions;
+    free(temp);
+    return counter;
+}
+
+void merge_nodes(RLEList list){
+    Node node=list->first_node->next;
+    if (!node){
+        return;
+    }
+    while (node->next){
+        if(node->symbol==node->next->symbol){
+            node->repetitions+= deleteNextNode(node);
+        }
+        else{
+            node=node->next;
+        }
+    }
+}
+
 RLEListResult NodeCutOff(Node node) {
     if (node->next == NULL) {
         return RLE_LIST_ERROR;
     }
-    if (node->next->next) //if C exists
-    {
-        node->next = node->next->next; //A->B --> A->C
-    } else {
-        node->next = NULL; // A->NULL
-    }
-    free(node->next); // B --> NULL
+    deleteNextNode(node);
     return RLE_LIST_SUCCESS;
 }
-
 Node FindNode(RLEList list, int index) {
     Node node = list->first_node;
     int depth = 0;
-    while (node->next->repetitions + depth < index) { // while (sum this far) < index
+    while (node->next != NULL && node->next->repetitions + depth <= index) { // while (sum this far) < index
         // for example: index=0, repetitions=1, depth=0: stops looping
         depth += node->next->repetitions;
         node = node->next;
@@ -132,12 +150,11 @@ RLEListResult RLEListRemove(RLEList list, int index) {
     if (check != RLE_LIST_SUCCESS) {
         return check;
     }
-
     Node node;
     if (index == 0) {
         node = list->first_node;
     } else {
-        node = FindNode(list, index - 1); // the node BEFORE the one containing the indexed char
+        node = FindNode(list, index); // the node BEFORE the one containing the indexed char
     }
 
     if (node->repetitions > 1) //if the indexed char is in this node
@@ -150,9 +167,8 @@ RLEListResult RLEListRemove(RLEList list, int index) {
     {
         return RLE_LIST_ERROR;
     }
-
-
     list->size--;
+    merge_nodes(list);
     return RLE_LIST_SUCCESS;
 }
 
@@ -166,7 +182,7 @@ char RLEListGet(RLEList list, int index, RLEListResult *result) {
     }
 
     Node node = FindNode(list, index);
-    return node->symbol;
+    return node->next->symbol;
 }
 
 RLEListResult RLEListMap(RLEList list, MapFunction map_function) {
@@ -175,9 +191,10 @@ RLEListResult RLEListMap(RLEList list, MapFunction map_function) {
     }
     Node node = list->first_node;
     while (node->next) {
-        node->next->symbol = map_function(node->next->symbol);
         node = node->next;
+        node->symbol = map_function(node->symbol);
     }
+    merge_nodes(list);
     //node->symbol=map_function(node->symbol);
     return RLE_LIST_SUCCESS;
 }

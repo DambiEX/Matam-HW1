@@ -1,3 +1,3 @@
-C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/cmake-build-debug/CMakeFiles/Matam_HW1.dir
-C:/Users/PC/Dropbox/introtomadmahbackup/HW1/Matam-HW1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/annav/Documents/CS/matam/hw1/Matam-HW1/hw1- code/Matam-HW1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/annav/Documents/CS/matam/hw1/Matam-HW1/hw1- code/Matam-HW1/cmake-build-debug/CMakeFiles/Matam_HW1.dir
+C:/Users/annav/Documents/CS/matam/hw1/Matam-HW1/hw1- code/Matam-HW1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
